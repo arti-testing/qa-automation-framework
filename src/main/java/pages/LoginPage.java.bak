@@ -1,5 +1,5 @@
 package pages;
-
+import pages.LoginPage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.WaitUtils;
@@ -30,7 +30,7 @@ public class LoginPage extends BasePage {
     }
 
     public String getFlashMessage() {
-        WaitUtils.waitForVisible(flashMessage);
-        return flashMessage.getText();
-    }
+    String msg = driver.findElement(flashMessage).getText();
+    return msg.replace("\n", "").trim();
+}
 }

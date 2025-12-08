@@ -1,5 +1,6 @@
 package pages;
-import pages.LoginPage;
+
+import base.BasePage;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 import utils.WaitUtils;
@@ -18,8 +19,12 @@ public class LoginPage extends BasePage {
     @FindBy(id = "flash")
     private WebElement flashMessage;
 
+    // ---------------------------
+    // Login action
+    // ---------------------------
     public void login(String username, String password) {
         WaitUtils.waitForVisible(usernameTxt);
+
         usernameTxt.clear();
         usernameTxt.sendKeys(username);
 
@@ -29,8 +34,11 @@ public class LoginPage extends BasePage {
         loginBtn.click();
     }
 
+    // ---------------------------
+    // Read flash success / error message
+    // ---------------------------
     public String getFlashMessage() {
-        WaitUtils.waitForVisible(flashMessage);
-        return flashMessage.getText();
+        String msg = flashMessage.getText();
+        return msg.replace("\n", "").trim();
     }
 }
