@@ -5,14 +5,24 @@ import io.restassured.response.Response;
 
 public class ApiClient {
 
-    public static Response get(String baseUrl, String endpoint) {
+    public static Response get(String url) {
         return RestAssured
                 .given()
-                .baseUri(baseUrl)
                 .when()
-                .get(endpoint)
+                .get(url)
                 .then()
-                .log().all()
+                .extract()
+                .response();
+    }
+
+    public static Response post(String url, Object body) {
+        return RestAssured
+                .given()
+                .contentType("application/json")
+                .body(body)
+                .when()
+                .post(url)
+                .then()
                 .extract()
                 .response();
     }
