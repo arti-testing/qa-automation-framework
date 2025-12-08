@@ -1,0 +1,36 @@
+package pages;
+
+import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.FindBy;
+import utils.WaitUtils;
+
+public class LoginPage extends BasePage {
+
+    @FindBy(id = "username")
+    private WebElement usernameTxt;
+
+    @FindBy(id = "password")
+    private WebElement passwordTxt;
+
+    @FindBy(css = "button[type='submit']")
+    private WebElement loginBtn;
+
+    @FindBy(id = "flash")
+    private WebElement flashMessage;
+
+    public void login(String username, String password) {
+        WaitUtils.waitForVisible(usernameTxt);
+        usernameTxt.clear();
+        usernameTxt.sendKeys(username);
+
+        passwordTxt.clear();
+        passwordTxt.sendKeys(password);
+
+        loginBtn.click();
+    }
+
+    public String getFlashMessage() {
+        WaitUtils.waitForVisible(flashMessage);
+        return flashMessage.getText();
+    }
+}
