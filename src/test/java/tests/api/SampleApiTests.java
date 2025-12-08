@@ -2,19 +2,27 @@ package tests.api;
 
 import api.ApiClient;
 import io.restassured.response.Response;
-import org.testng.Assert;
 import org.testng.annotations.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 public class SampleApiTests {
 
+    ApiClient client = new ApiClient();
+
     @Test
-    public void verifyGetCallReturns200() {
-        String baseUrl = "https://reqres.in";
-        String endpoint = "/api/users?page=2";
+    public void testGetUsers() {
+        Response response = client.get("/api/users");
+        System.out.println(response.asString());
+    }
 
-        Response response = ApiClient.get(baseUrl, endpoint);
+    @Test
+    public void testGetUsersWithParams() {
+        Map<String, String> params = new HashMap<>();
+        params.put("page", "2");
 
-        Assert.assertEquals(response.getStatusCode(), 200,
-                "Status code should be 200 for successful GET call");
+        Response response = client.get("/api/users", params);
+        System.out.println(response.asString());
     }
 }

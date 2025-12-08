@@ -2,26 +2,32 @@ package api;
 
 import io.restassured.RestAssured;
 import io.restassured.response.Response;
+import java.util.Map;
 
 public class ApiClient {
 
-    public static Response get(String url) {
+    private static final String BASE_URL = "https://reqres.in";  // You can change later
+
+    // Simple GET: /api/users
+    public Response get(String endpoint) {
         return RestAssured
                 .given()
+                .baseUri(BASE_URL)
                 .when()
-                .get(url)
+                .get(endpoint)
                 .then()
                 .extract()
                 .response();
     }
 
-    public static Response post(String url, Object body) {
+    // GET with Query Params: /api/users?page=2
+    public Response get(String endpoint, Map<String, String> params) {
         return RestAssured
                 .given()
-                .contentType("application/json")
-                .body(body)
+                .baseUri(BASE_URL)
+                .queryParams(params)
                 .when()
-                .post(url)
+                .get(endpoint)
                 .then()
                 .extract()
                 .response();
