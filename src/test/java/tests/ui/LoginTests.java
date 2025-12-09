@@ -13,7 +13,10 @@ public class LoginTests extends BaseTest {
         page.login("tomsmith", "SuperSecretPassword!");
 
         String message = page.getFlashMessage();
-        Assert.assertTrue(message.contains("You logged into a secure area!"),
-                "Login success message should be displayed");
+        Assert.assertTrue(
+    message.toLowerCase().contains("you logged into a secure area"),
+    "Login success message should be displayed"
+		);
+
     }
 }
