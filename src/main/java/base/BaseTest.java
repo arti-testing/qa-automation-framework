@@ -1,9 +1,10 @@
 package base;
 
-import config.ConfigReader;
-import driver.DriverFactory;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
+
+import config.ConfigReader;
+import driver.DriverFactory;
 
 public abstract class BaseTest {
 
